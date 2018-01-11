@@ -39,6 +39,12 @@ public class UserRepository {
         }
 
         this.users.put(user.getUserName(), user);
+        try {
+            this.database.addData(userTable, this.users);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public User getUser(String userName) {

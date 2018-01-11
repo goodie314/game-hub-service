@@ -14,12 +14,8 @@ public class TestController {
     private UserRepository userRepository;
 
     @RequestMapping(path = "")
-    public String test() {
-        User user = userRepository.getUser("matt");
-        if (user != null) {
-            return user.getUserName();
-        }
-        return "no user found named matt";
+    public User test() {
+        return this.userRepository.getUser("matt");
     }
 
     @RequestMapping(path = "{username}")

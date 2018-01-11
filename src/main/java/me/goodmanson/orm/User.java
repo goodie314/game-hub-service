@@ -1,5 +1,6 @@
 package me.goodmanson.orm;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -8,7 +9,8 @@ import java.io.Serializable;
 public class User implements Serializable {
 
     private String userName;
-    private String password;
+    @JsonIgnore
+    private Integer password;
 
     public User() {
     }
@@ -21,11 +23,11 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    public Integer getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(Integer password) {
         this.password = password;
     }
 }

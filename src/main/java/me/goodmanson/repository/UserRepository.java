@@ -5,8 +5,11 @@ import me.goodmanson.orm.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class UserRepository {
@@ -21,6 +24,9 @@ public class UserRepository {
     }
 
     public void initData() {
+        if (this.users != null) {
+            return;
+        }
         try {
             this.users = (Map<String, User>) this.database.getTable(userTable);
             if (this.users == null) {
@@ -34,9 +40,7 @@ public class UserRepository {
     }
 
     public void addUser (User user) {
-        if (this.users == null) {
-            this.initData();
-        }
+        this.initData();
 
         this.users.put(user.getUserName(), user);
         try {
@@ -48,10 +52,22 @@ public class UserRepository {
     }
 
     public User getUser(String userName) {
-        if (this.users == null) {
-            this.initData();
-        }
+        this.initData();
 
         return this.users.get(userName);
+    }
+
+    public List<User> getUsers(List<String> userNames) {
+        this.initData();
+
+        return userNames.stream()
+                .map(this.users::get)
+                .collect(Collectors.toList());
+    }
+
+    public List<User> getAllUsers() {
+        this.initData();
+
+        return new ArrayList<>(this.users.values());
     }
 }

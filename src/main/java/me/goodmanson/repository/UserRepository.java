@@ -20,10 +20,7 @@ public class UserRepository {
     private static final String userTable = "users";
     private Map<String, User> users;
 
-    public UserRepository () {
-    }
-
-    public void initData() {
+    private void initData() {
         if (this.users != null) {
             return;
         }

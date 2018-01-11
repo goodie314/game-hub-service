@@ -9,7 +9,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
 
-public class WebcrawlerInit implements WebApplicationInitializer {
+public class GameHubServiceInit implements WebApplicationInitializer {
 
 
     @Override
@@ -23,7 +23,7 @@ public class WebcrawlerInit implements WebApplicationInitializer {
 
     private AnnotationConfigWebApplicationContext getContext() {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(WebcrawlerConfig.class);
+        context.register(GameHubServiceConfig.class);
         return context;
     }
 }

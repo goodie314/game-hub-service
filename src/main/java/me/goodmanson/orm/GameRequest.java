@@ -3,7 +3,8 @@ package me.goodmanson.orm;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by u6062536 on 1/11/2018.
@@ -13,8 +14,9 @@ import java.util.Map;
 public class GameRequest implements Serializable {
 
     private String game;
-    private User requester;
-    private Map<String, Boolean> invitees;
+    private String requester;
+    private List<String> invitees;
+    private Date creationDate;
 
     public String getGame() {
         return game;
@@ -24,19 +26,27 @@ public class GameRequest implements Serializable {
         this.game = game;
     }
 
-    public User getRequester() {
+    public String getRequester() {
         return requester;
     }
 
-    public void setRequester(User requester) {
+    public void setRequester(String requester) {
         this.requester = requester;
     }
 
-    public Map<String, Boolean> getInvitees() {
+    public List<String> getInvitees() {
         return invitees;
     }
 
-    public void setInvitees(Map<String, Boolean> invitees) {
+    public void setInvitees(List<String> invitees) {
         this.invitees = invitees;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

@@ -17,7 +17,7 @@ public class GameRequestService {
         this.gameRequestRepository.makeGameRequest(request);
     }
 
-    public List<GameRequest> getGameRequests(String game, String userName) {
+    public List<GameRequest> getGameRequests(String game, List<String> userName) {
         return this.gameRequestRepository.getGameRequests(game, userName);
     }
 }

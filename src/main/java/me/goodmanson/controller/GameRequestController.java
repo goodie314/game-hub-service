@@ -25,7 +25,7 @@ public class GameRequestController {
 
     @RequestMapping(path = "{game}/{userName}", method = RequestMethod.GET)
     public List<GameRequest> getGameRequests(@PathVariable String game,
-                                             @PathVariable String userName) {
+                                             @PathVariable List<String> userName) {
         return this.gameRequestService.getGameRequests(game, userName);
     }
 }

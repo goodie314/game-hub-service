@@ -1,7 +1,6 @@
 package me.goodmanson.repository;
 
 import me.goodmanson.database.Database;
-import me.goodmanson.orm.Game;
 import me.goodmanson.orm.GameRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,7 +56,7 @@ public class GameRequestRepository {
         }
     }
 
-    public List<GameRequest> getGameRequests(String game, String userName) {
+    public List<GameRequest> getGameRequests(String game, List<String> userName) {
         List<GameRequest> requests;
         this.initData();
 
@@ -67,7 +66,7 @@ public class GameRequestRepository {
         }
 
         return requests.stream()
-                .filter(request -> request.getInvitees().containsKey(userName) || request.getRequester().getUserName().equals(userName))
+                .filter(request -> request.getInvitees().equals(userName))
                 .collect(Collectors.toList());
     }
 }

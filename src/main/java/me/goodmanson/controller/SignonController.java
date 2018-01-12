@@ -3,7 +3,6 @@ package me.goodmanson.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import me.goodmanson.orm.User;
-import me.goodmanson.repository.UserRepository;
 import me.goodmanson.service.SignonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

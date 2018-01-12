@@ -4,6 +4,7 @@ import me.goodmanson.database.Database;
 import me.goodmanson.orm.Game;
 import me.goodmanson.orm.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 /**
  * Created by u6062536 on 1/11/2018.
  */
+
+@Service
 public class GameRepository {
 
     @Autowired

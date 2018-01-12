@@ -2,6 +2,7 @@ package me.goodmanson.orm;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -9,11 +10,11 @@ import java.util.Map;
  */
 
 @Component
-public class GameRequest {
+public class GameRequest implements Serializable {
 
     private String game;
     private User requester;
-    private Map<User, Boolean> invitees;
+    private Map<String, Boolean> invitees;
 
     public String getGame() {
         return game;
@@ -31,11 +32,11 @@ public class GameRequest {
         this.requester = requester;
     }
 
-    public Map<User, Boolean> getInvitees() {
+    public Map<String, Boolean> getInvitees() {
         return invitees;
     }
 
-    public void setInvitees(Map<User, Boolean> invitees) {
+    public void setInvitees(Map<String, Boolean> invitees) {
         this.invitees = invitees;
     }
 }

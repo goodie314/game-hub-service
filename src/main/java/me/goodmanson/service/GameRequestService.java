@@ -5,6 +5,8 @@ import me.goodmanson.repository.GameRequestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GameRequestService {
 
@@ -13,5 +15,9 @@ public class GameRequestService {
 
     public void makeGameRequest(GameRequest request) {
         this.gameRequestRepository.makeGameRequest(request);
+    }
+
+    public List<GameRequest> getGameRequests(String game, String userName) {
+        return this.gameRequestRepository.getGameRequests(game, userName);
     }
 }

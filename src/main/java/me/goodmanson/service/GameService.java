@@ -31,7 +31,7 @@ public class GameService {
         return this.gameRepository.getGame(gameId);
     }
 
-    public List<Game> getGamesByPlayer(User user) {
-        return this.gameRepository.getGamesByUser(user);
+    public List<Game> getGamesByPlayer(String userName) {
+        return this.gameRepository.getGamesByUser(userName);
     }
 }

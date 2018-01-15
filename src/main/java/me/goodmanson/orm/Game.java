@@ -3,6 +3,7 @@ package me.goodmanson.orm;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,7 +14,7 @@ import java.util.List;
 public class Game implements Serializable {
 
     private Integer gameId;
-    private List<User> players;
+    private List<String> players;
     private String currentGameState;
 
     public Integer getGameId() {
@@ -24,11 +25,11 @@ public class Game implements Serializable {
         this.gameId = gameId;
     }
 
-    public List<User> getPlayers() {
+    public List<String> getPlayers() {
         return players;
     }
 
-    public void setPlayers(List<User> players) {
+    public void setPlayers(List<String> players) {
         this.players = players;
     }
 

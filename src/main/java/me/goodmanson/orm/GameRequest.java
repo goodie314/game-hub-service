@@ -13,10 +13,21 @@ import java.util.List;
 @Component
 public class GameRequest implements Serializable {
 
+    private Integer gameRequestId;
     private String game;
     private String requester;
     private List<String> invitees;
     private Date creationDate;
+    private Integer numberAccepted;
+
+
+    public Integer getGameRequestId() {
+        return gameRequestId;
+    }
+
+    public void setGameRequestId(Integer gameRequestId) {
+        this.gameRequestId = gameRequestId;
+    }
 
     public String getGame() {
         return game;
@@ -48,5 +59,17 @@ public class GameRequest implements Serializable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public Integer getNumberAccepted() {
+        return numberAccepted;
+    }
+
+    public void setNumberAccepted(Integer numberAccepted) {
+        this.numberAccepted = numberAccepted;
+    }
+
+    public boolean equals(GameRequest request) {
+        return this.creationDate.equals(request.creationDate);
     }
 }

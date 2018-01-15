@@ -4,11 +4,7 @@ import me.goodmanson.orm.Game;
 import me.goodmanson.orm.User;
 import me.goodmanson.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,8 +20,8 @@ public class GameController {
     private GameService gameService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Game> getGamesByPlayer(@RequestParam User user) {
-        return this.gameService.getGamesByPlayer(user);
+    public List<Game> getGamesByPlayer(@RequestParam String userName) {
+        return this.gameService.getGamesByPlayer(userName);
     }
 
     @RequestMapping(path = "{gameId}", method = RequestMethod.GET)
@@ -39,7 +35,7 @@ public class GameController {
     }
 
     @RequestMapping(path = "update", method = RequestMethod.POST)
-    public void updateGame(@RequestParam Game game) {
+    public void updateGame(@RequestBody Game game) {
         this.gameService.updateGame(game);
     }
 }

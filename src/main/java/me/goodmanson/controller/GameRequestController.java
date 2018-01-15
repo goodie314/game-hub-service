@@ -1,5 +1,6 @@
 package me.goodmanson.controller;
 
+import me.goodmanson.orm.Game;
 import me.goodmanson.orm.GameRequest;
 import me.goodmanson.service.GameRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,14 @@ public class GameRequestController {
         this.gameRequestService.makeGameRequest(request);
     }
 
+    @RequestMapping(path = "accept", method = RequestMethod.POST)
+    public Game acceptRequest(@RequestBody GameRequest request) {
+        return this.gameRequestService.acceptRequest(request);
+    }
+
     @RequestMapping(path = "{game}/{userName}", method = RequestMethod.GET)
     public List<GameRequest> getGameRequests(@PathVariable String game,
-                                             @PathVariable List<String> userName) {
+                                             @PathVariable String userName) {
         return this.gameRequestService.getGameRequests(game, userName);
     }
 }

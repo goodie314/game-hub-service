@@ -46,7 +46,7 @@ public class GameRepository {
         Optional<Integer> id;
 
         if (this.gameId != null) {
-            return gameId++;
+            return this.gameId++;
         }
 
         this.initData();
@@ -56,7 +56,7 @@ public class GameRepository {
                 .max(Integer::compareTo);
         this.gameId = id.orElse(0);
 
-        return this.gameId;
+        return this.gameId++;
     }
 
     public Game getGame(Integer gameId) {
@@ -65,21 +65,38 @@ public class GameRepository {
         return this.games.get(gameId);
     }
 
-    public List<Game> getGamesByUser(User user) {
+    public List<Game> getGamesByUser(String userName) {
         this.initData();
 
         return this.games
                 .values()
                 .stream()
-                .filter((game) -> game.getPlayers().contains(user))
+                .filter((game) -> game.getPlayers().contains(userName))
                 .collect(Collectors.toList());
     }
 
     public void updateGame(Game game) {
-        if (game.getGameId() == null) {
-            game.setGameId(this.getNextId());
-        }
+        Game prevGame;
+        this.initData();
+
+        prevGame = this.getGame(game.getGameId());
+        game.setPlayers(prevGame.getPlayers());
         this.games.put(game.getGameId(), game);
+        try {
+            this.database.addData(gamesTable, this.games);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createGame(Game game) {
+        Integer gameId;
+        this.initData();
+
+        gameId = this.getNextId();
+        game.setGameId(gameId);
+        this.games.put(gameId, game);
         try {
             this.database.addData(gamesTable, this.games);
         }

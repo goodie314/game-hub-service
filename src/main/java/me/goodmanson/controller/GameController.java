@@ -29,6 +29,11 @@ public class GameController {
         return this.gameService.getGame(gameId);
     }
 
+    @RequestMapping(path = "{gameId}", method = RequestMethod.DELETE)
+    public void deleteGame(@PathVariable Integer gameId) {
+        this.gameService.deleteGame(gameId);
+    }
+
     @RequestMapping(path = "create", method = RequestMethod.POST)
     public void createGame(@RequestParam Game game) {
         this.gameService.createGame(game);

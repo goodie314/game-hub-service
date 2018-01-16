@@ -25,4 +25,8 @@ public class GameRequestService {
     public Game acceptRequest(GameRequest request) {
         return this.gameRequestRepository.acceptRequest(request);
     }
+
+    public void declineRequest(Integer gameRequestId) {
+        this.gameRequestRepository.declineRequest(gameRequestId);
+    }
 }

@@ -34,4 +34,9 @@ public class GameRequestController {
                                              @PathVariable String userName) {
         return this.gameRequestService.getGameRequests(game, userName);
     }
+
+    @RequestMapping(path = "decline/{gameRequestId}", method = RequestMethod.POST)
+    public void declineGameRequest(@PathVariable Integer gameRequestId) {
+        this.gameRequestService.declineRequest(gameRequestId);
+    }
 }

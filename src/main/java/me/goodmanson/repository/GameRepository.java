@@ -104,4 +104,16 @@ public class GameRepository {
             e.printStackTrace();
         }
     }
+
+    public void deleteGame(Integer gameId) {
+        this.initData();
+
+        this.games.remove(gameId);
+        try {
+            this.database.addData(gamesTable, this.games);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -140,4 +140,16 @@ public class GameRequestRepository {
             return null;
         }
     }
+
+    public void declineRequest(Integer gameRequestId) {
+        this.initData();
+
+        this.gameRequests.remove(gameRequestId);
+        try {
+            this.database.addData(gameRequestsTable, this.gameRequests);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

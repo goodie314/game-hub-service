@@ -34,4 +34,8 @@ public class GameService {
     public List<Game> getGamesByPlayer(String userName) {
         return this.gameRepository.getGamesByUser(userName);
     }
+
+    public void deleteGame(Integer gameId) {
+        this.gameRepository.deleteGame(gameId);
+    }
 }

@@ -4,19 +4,24 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * local database class
+ */
 @Service
 public class Database {
+    // file location of database
     private static final String location = "game-hub-service-database.java";
+    // contains all tables
     private Map<String, Object> tables;
 
     public Database() {
     }
 
+    // loads tables from table location file into memory
     public void loadTables () throws IOException, ClassNotFoundException {
         ObjectInputStream reader;
         File file;
@@ -39,6 +44,7 @@ public class Database {
         }
     }
 
+    // adds data to table in local memory and updates database file
     public void addData (String tableName, Object data) throws IOException, ClassNotFoundException {
         ObjectOutputStream writer;
 
@@ -54,6 +60,7 @@ public class Database {
         writer.close();
     }
 
+    // returns a table matching the table name provided
     public Object getTable (String tableName) throws IOException, ClassNotFoundException {
         if (this.tables != null) {
             return this.tables.get(tableName);
@@ -68,6 +75,7 @@ public class Database {
         return this.tables.get(tableName);
     }
 
+    // initializes the table and returns it to a repository
     public Object initData(String tableName) {
         Object table = null;
 
@@ -86,7 +94,8 @@ public class Database {
         return table;
     }
 
-    public Integer getNextKey(String tableName, Set<Integer> keys) {
+    // gets the next integer key from a set of keys
+    public Integer getNextKey(Set<Integer> keys) {
         Integer key;
         Optional<Integer> optKey;
 

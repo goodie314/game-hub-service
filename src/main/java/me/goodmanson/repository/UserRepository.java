@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -21,25 +20,14 @@ public class UserRepository {
     private Map<String, User> users;
 
     private void initData() {
-//        if (this.users != null) {
-//            return;
-//        }
-//        try {
-//            this.users = (Map<String, User>) this.database.getTable(userTable);
-//            if (this.users == null) {
-//                this.users = new HashMap<>();
-//                this.database.addData(userTable, this.users);
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
         this.users = (Map<String, User>) this.database.initData(userTable);
     }
 
+    // adds a user to the database
     public void addUser (User user) {
         this.initData();
 
+        user.setUserName(user.getUserName().toLowerCase());
         this.users.put(user.getUserName(), user);
         try {
             this.database.addData(userTable, this.users);
@@ -49,20 +37,14 @@ public class UserRepository {
         }
     }
 
+    // returns user with userName
     public User getUser(String userName) {
         this.initData();
 
-        return this.users.get(userName);
+        return this.users.get(userName.toLowerCase());
     }
 
-    public List<User> getUsers(List<String> userNames) {
-        this.initData();
-
-        return userNames.stream()
-                .map(this.users::get)
-                .collect(Collectors.toList());
-    }
-
+    // returns all users in database
     public List<User> getAllUsers() {
         this.initData();
 

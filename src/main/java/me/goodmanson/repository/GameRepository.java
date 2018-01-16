@@ -2,14 +2,11 @@ package me.goodmanson.repository;
 
 import me.goodmanson.database.Database;
 import me.goodmanson.orm.Game;
-import me.goodmanson.orm.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -26,45 +23,17 @@ public class GameRepository {
     private Map<Integer, Game> games;
 
     private void initData() {
-//        if (this.games != null) {
-//            return;
-//        }
-//        try {
-//            this.games = (Map<Integer, Game>) this.database.getTable(gamesTable);
-//            if (this.games== null) {
-//                this.games = new HashMap<>();
-//                this.database.addData(gamesTable, this.games);
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
         this.games = (Map<Integer, Game>) this.database.initData(gamesTable);
     }
 
-//    private Integer getNextId() {
-//        Optional<Integer> id;
-//
-//        if (this.gameId != null) {
-//            return this.gameId++;
-//        }
-//
-//        this.initData();
-//
-//        id = this.games.keySet()
-//                .stream()
-//                .max(Integer::compareTo);
-//        this.gameId = id.orElse(0);
-//
-//        return this.gameId++;
-//    }
-
+    // returns game with gameId
     public Game getGame(Integer gameId) {
         this.initData();
 
         return this.games.get(gameId);
     }
 
+    // returns a list of games in which the userName is a player
     public List<Game> getGamesByUser(String userName) {
         this.initData();
 
@@ -75,6 +44,7 @@ public class GameRepository {
                 .collect(Collectors.toList());
     }
 
+    // updates game object in database
     public void updateGame(Game game) {
         Game prevGame;
         this.initData();
@@ -90,11 +60,12 @@ public class GameRepository {
         }
     }
 
+    // creates a game in the database
     public void createGame(Game game) {
         Integer gameId;
         this.initData();
 
-        gameId = this.database.getNextKey(gamesTable, this.games.keySet());
+        gameId = this.database.getNextKey(this.games.keySet());
         game.setGameId(gameId);
         this.games.put(gameId, game);
         try {
@@ -105,6 +76,7 @@ public class GameRepository {
         }
     }
 
+    // removes a game with gameId from the database
     public void deleteGame(Integer gameId) {
         this.initData();
 

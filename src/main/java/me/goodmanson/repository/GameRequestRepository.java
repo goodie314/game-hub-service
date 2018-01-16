@@ -20,58 +20,19 @@ public class GameRequestRepository {
 
     private static final String gameRequestsTable = "gameRequests";
     private Map<Integer, GameRequest> gameRequests;
-    private Integer gameRequestId;
 
     private void initData() {
-//        if (this.gameRequests != null) {
-//            return;
-//        }
-//        try {
-//            this.gameRequests = (Map<Integer, GameRequest>) this.database.getTable(gameRequestsTable);
-//            if (this.gameRequests == null) {
-//                this.gameRequests = new HashMap<>();
-//                this.database.addData(gameRequestsTable, this.gameRequests);
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
         this.gameRequests = (Map<Integer, GameRequest>) this.database.initData(gameRequestsTable);
     }
 
-//    private Integer getNextId() {
-//        Optional<Integer> id;
-//
-//        if (this.gameRequestId != null) {
-//            return this.gameRequestId++;
-//        }
-//
-//        this.initData();
-//
-//        id = this.gameRequests.keySet()
-//                .stream()
-//                .max(Integer::compareTo);
-//        this.gameRequestId = id.orElse(0);
-
-//        return this.gameRequestId++;
-//    }
-
+    // adds a GameRequest to the database
     public void makeGameRequest(GameRequest request) {
-//        List<GameRequest> requests;
-//        String game;
         Integer id;
         this.initData();
 
-//        game = request.getGame();
-//        requests = this.gameRequests.get(game);
-//        if (requests == null) {
-//            requests = new ArrayList<>();
-//        }
-//        id = this.getNextId();
-        id = this.database.getNextKey(gameRequestsTable, this.gameRequests.keySet());
+        id = this.database.getNextKey(this.gameRequests.keySet());
         request.setGameRequestId(id);
         request.setNumberAccepted(0);
-//        requests.add(request);
         this.gameRequests.put(id, request);
         try {
             this.database.addData(gameRequestsTable, this.gameRequests);
@@ -81,14 +42,9 @@ public class GameRequestRepository {
         }
     }
 
+    // gets all GameRequests for a game type game where the userName is an invitee in the GameRequest
     public List<GameRequest> getGameRequests(String game, String userName) {
-//        List<GameRequest> requests;
         this.initData();
-
-//        requests = this.gameRequests.get(game);
-//        if (requests == null) {
-//            requests = new ArrayList<>();
-//        }
 
         return this.gameRequests.values().stream()
                 .filter(request -> {
@@ -105,6 +61,8 @@ public class GameRequestRepository {
                 .collect(Collectors.toList());
     }
 
+    // Accepts the game request. If all invitees have accepted it removes the request from the database and
+    // create a new game which is returned
     public Game acceptRequest(GameRequest request) {
         Game game;
         Integer numberAccepted;
@@ -143,6 +101,7 @@ public class GameRequestRepository {
         }
     }
 
+    // declines the request and removes it from the database
     public void declineRequest(Integer gameRequestId) {
         this.initData();
 

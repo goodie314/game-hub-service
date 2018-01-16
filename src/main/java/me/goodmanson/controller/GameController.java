@@ -1,7 +1,6 @@
 package me.goodmanson.controller;
 
 import me.goodmanson.orm.Game;
-import me.goodmanson.orm.User;
 import me.goodmanson.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

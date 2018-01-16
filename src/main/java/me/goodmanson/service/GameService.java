@@ -1,7 +1,6 @@
 package me.goodmanson.service;
 
 import me.goodmanson.orm.Game;
-import me.goodmanson.orm.User;
 import me.goodmanson.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

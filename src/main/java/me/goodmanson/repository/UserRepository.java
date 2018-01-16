@@ -21,19 +21,20 @@ public class UserRepository {
     private Map<String, User> users;
 
     private void initData() {
-        if (this.users != null) {
-            return;
-        }
-        try {
-            this.users = (Map<String, User>) this.database.getTable(userTable);
-            if (this.users == null) {
-                this.users = new HashMap<>();
-                this.database.addData(userTable, this.users);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        if (this.users != null) {
+//            return;
+//        }
+//        try {
+//            this.users = (Map<String, User>) this.database.getTable(userTable);
+//            if (this.users == null) {
+//                this.users = new HashMap<>();
+//                this.database.addData(userTable, this.users);
+//            }
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        this.users = (Map<String, User>) this.database.initData(userTable);
     }
 
     public void addUser (User user) {

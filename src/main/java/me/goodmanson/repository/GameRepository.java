@@ -24,7 +24,6 @@ public class GameRepository {
 
     private static final String gamesTable = "games";
     private Map<Integer, Game> games;
-    private Integer gameId;
 
     private void initData() {
 //        if (this.games != null) {

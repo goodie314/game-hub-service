@@ -23,37 +23,38 @@ public class GameRequestRepository {
     private Integer gameRequestId;
 
     private void initData() {
-        if (this.gameRequests != null) {
-            return;
-        }
-        try {
-            this.gameRequests = (Map<Integer, GameRequest>) this.database.getTable(gameRequestsTable);
-            if (this.gameRequests == null) {
-                this.gameRequests = new HashMap<>();
-                this.database.addData(gameRequestsTable, this.gameRequests);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        if (this.gameRequests != null) {
+//            return;
+//        }
+//        try {
+//            this.gameRequests = (Map<Integer, GameRequest>) this.database.getTable(gameRequestsTable);
+//            if (this.gameRequests == null) {
+//                this.gameRequests = new HashMap<>();
+//                this.database.addData(gameRequestsTable, this.gameRequests);
+//            }
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        this.gameRequests = (Map<Integer, GameRequest>) this.database.initData(gameRequestsTable);
     }
 
-    private Integer getNextId() {
-        Optional<Integer> id;
+//    private Integer getNextId() {
+//        Optional<Integer> id;
+//
+//        if (this.gameRequestId != null) {
+//            return this.gameRequestId++;
+//        }
+//
+//        this.initData();
+//
+//        id = this.gameRequests.keySet()
+//                .stream()
+//                .max(Integer::compareTo);
+//        this.gameRequestId = id.orElse(0);
 
-        if (this.gameRequestId != null) {
-            return this.gameRequestId++;
-        }
-
-        this.initData();
-
-        id = this.gameRequests.keySet()
-                .stream()
-                .max(Integer::compareTo);
-        this.gameRequestId = id.orElse(0);
-
-        return this.gameRequestId++;
-    }
+//        return this.gameRequestId++;
+//    }
 
     public void makeGameRequest(GameRequest request) {
 //        List<GameRequest> requests;
@@ -66,7 +67,8 @@ public class GameRequestRepository {
 //        if (requests == null) {
 //            requests = new ArrayList<>();
 //        }
-        id = this.getNextId();
+//        id = this.getNextId();
+        id = this.database.getNextKey(gameRequestsTable, this.gameRequests.keySet());
         request.setGameRequestId(id);
         request.setNumberAccepted(0);
 //        requests.add(request);

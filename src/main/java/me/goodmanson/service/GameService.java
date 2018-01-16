@@ -20,7 +20,7 @@ public class GameService {
 
     public void createGame(Game game) {
         game.setGameId(null);
-        this.gameRepository.updateGame(game);
+        this.gameRepository.createGame(game);
     }
 
     public void updateGame(Game game) {

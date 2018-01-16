@@ -4,7 +4,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class Database {
@@ -63,5 +66,35 @@ public class Database {
         }
 
         return this.tables.get(tableName);
+    }
+
+    public Object initData(String tableName) {
+        Object table = null;
+
+        try {
+            table = (Map<Object, Object>) this.getTable(tableName);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (table == null) {
+            table = new HashMap<>();
+            this.tables.put(tableName, table);
+        }
+
+        return table;
+    }
+
+    public Integer getNextKey(String tableName, Set<Integer> keys) {
+        Integer key;
+        Optional<Integer> optKey;
+
+        optKey = keys
+                .stream()
+                .max(Integer::compareTo);
+        key = optKey.orElse(0);
+        key += 1;
+        return key;
     }
 }

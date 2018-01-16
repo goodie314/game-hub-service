@@ -27,37 +27,38 @@ public class GameRepository {
     private Integer gameId;
 
     private void initData() {
-        if (this.games != null) {
-            return;
-        }
-        try {
-            this.games = (Map<Integer, Game>) this.database.getTable(gamesTable);
-            if (this.games== null) {
-                this.games = new HashMap<>();
-                this.database.addData(gamesTable, this.games);
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        if (this.games != null) {
+//            return;
+//        }
+//        try {
+//            this.games = (Map<Integer, Game>) this.database.getTable(gamesTable);
+//            if (this.games== null) {
+//                this.games = new HashMap<>();
+//                this.database.addData(gamesTable, this.games);
+//            }
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
+        this.games = (Map<Integer, Game>) this.database.initData(gamesTable);
     }
 
-    private Integer getNextId() {
-        Optional<Integer> id;
-
-        if (this.gameId != null) {
-            return this.gameId++;
-        }
-
-        this.initData();
-
-        id = this.games.keySet()
-                .stream()
-                .max(Integer::compareTo);
-        this.gameId = id.orElse(0);
-
-        return this.gameId++;
-    }
+//    private Integer getNextId() {
+//        Optional<Integer> id;
+//
+//        if (this.gameId != null) {
+//            return this.gameId++;
+//        }
+//
+//        this.initData();
+//
+//        id = this.games.keySet()
+//                .stream()
+//                .max(Integer::compareTo);
+//        this.gameId = id.orElse(0);
+//
+//        return this.gameId++;
+//    }
 
     public Game getGame(Integer gameId) {
         this.initData();
@@ -94,7 +95,7 @@ public class GameRepository {
         Integer gameId;
         this.initData();
 
-        gameId = this.getNextId();
+        gameId = this.database.getNextKey(gamesTable, this.games.keySet());
         game.setGameId(gameId);
         this.games.put(gameId, game);
         try {

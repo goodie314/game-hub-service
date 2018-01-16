@@ -35,7 +35,7 @@ public class GameController {
     }
 
     @RequestMapping(path = "create", method = RequestMethod.POST)
-    public void createGame(@RequestParam Game game) {
+    public void createGame(@RequestBody Game game) {
         this.gameService.createGame(game);
     }
 

@@ -23,6 +23,12 @@ public class GameController {
         return this.gameService.getGamesByPlayer(userName);
     }
 
+    @RequestMapping(path = "{game}/{userName}", method = RequestMethod.GET)
+    public List<Game> getGamesByGameDescriptionAndPlayer(@PathVariable String game,
+                                                         @PathVariable String userName) {
+        return this.gameService.getGamesByDescriptionAndPlayer(game, userName);
+    }
+
     @RequestMapping(path = "{gameId}", method = RequestMethod.GET)
     public Game getGame(@PathVariable Integer gameId) {
         return this.gameService.getGame(gameId);

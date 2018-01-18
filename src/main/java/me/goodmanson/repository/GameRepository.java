@@ -44,6 +44,17 @@ public class GameRepository {
                 .collect(Collectors.toList());
     }
 
+    // returns a list of games with the same descriptor and where the userName is a player
+    public List<Game> getGamesByDescriptionAndPlayer(String gameDescription, String userName) {
+        this.initData();
+
+        return this.games
+                .values()
+                .stream()
+                .filter(game -> game.getGameDescriptor().equals(gameDescription) && game.getPlayers().contains(userName))
+                .collect(Collectors.toList());
+    }
+
     // updates game object in database
     public void updateGame(Game game) {
         Game prevGame;

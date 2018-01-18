@@ -80,6 +80,7 @@ public class GameRequestRepository {
             players.add(request.getRequester());
             Collections.shuffle(players);
             game.setPlayers(players);
+            game.setGameDescriptor(request.getGame());
             this.gameRepository.createGame(game);
             this.gameRequests.remove(request.getGameRequestId());
             try {

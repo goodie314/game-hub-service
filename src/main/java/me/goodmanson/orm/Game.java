@@ -16,6 +16,7 @@ public class Game implements Serializable {
     private Integer gameId;
     private List<String> players;
     private String currentGameState;
+    private String gameDescriptor;
 
     public Integer getGameId() {
         return gameId;
@@ -39,5 +40,13 @@ public class Game implements Serializable {
 
     public void setCurrentGameState(String currentGameState) {
         this.currentGameState = currentGameState;
+    }
+
+    public String getGameDescriptor() {
+        return gameDescriptor;
+    }
+
+    public void setGameDescriptor(String gameDescriptor) {
+        this.gameDescriptor = gameDescriptor;
     }
 }
